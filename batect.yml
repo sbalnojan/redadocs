@@ -1,0 +1,37 @@
+containers:
+  build-env:
+    image: python:3.7
+    volumes:
+      - local: .
+        container: /src
+        options: cached
+      - local: .pip-cache
+        container: /src/.pip-cache
+        options: cached
+      - local: .pipenv-cache
+        container: /src/.pipenv-cache
+    working_directory: /src
+    environment:
+      PYTHONPATH: "/src"
+      PYTHONUSERBASE: "/src/.pip-cache"
+      PIPENV_VENV_IN_PROJECT: true
+    run_as_current_user:
+      enabled: true
+      home_directory: /home/container-user
+
+tasks:
+  dep:
+    description: Install dependencies via pipenv
+    group: Utility tasks
+    run:
+      container: build-env
+      command: sh -c 'pip install --user pipenv; python -m pipenv install'
+
+  shell:
+    description: Start a shell in the development environment.
+    group: Utility tasks
+    prerequisites:
+      - dep
+    run:
+      container: build-env
+      command: /bin/sh
