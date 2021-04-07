@@ -7,9 +7,12 @@ verify_ssl = true
 
 [packages]
 pandas = "*"
+psycopg2-binary = "*"
 psycopg2 = "*"
 sqlalchemy = "*"
 pytest = "*"
+redash-toolbelt = "*"
+zipp = {editable = true, path = "."}
 
 [requires]
-python_version = "3.7"
+python_version = "3.9.2"
