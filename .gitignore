@@ -1,6 +1,7 @@
-.pip-cache
+*cache*
 .pipenv*
 *venv*
 *idea*
 *egg*
 *reqlib*
+.env
