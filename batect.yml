@@ -1,6 +1,6 @@
 containers:
   build-env:
-    image: python:3.7
+    image: python:3.9.2
     volumes:
       - local: .
         container: /src
@@ -21,17 +21,35 @@ containers:
 
 tasks:
   dep:
-    description: Install dependencies via pipenv
+    description: Installs dependencies via pipenv
     group: Utility tasks
     run:
       container: build-env
-      command: sh -c 'pip install --user pipenv; python -m pipenv install'
-
+      command: ./setup.sh
+      
   shell:
     description: Start a shell in the development environment.
     group: Utility tasks
-    prerequisites:
-      - dep
+#    prerequisites:
+#      - dep
     run:
       container: build-env
       command: /bin/sh
+
+  test:
+    description: Runs the tests inside docker.
+    group: Utility tasks
+#    prerequisites: is a prereq, but I don't want to run the setup script always...
+#      - dep
+    run:
+      container: build-env
+      command: sh -c 'python -m pipenv run pytest'
+
+  run_csv_output:
+    description: Auto sources your .env file, then runs the CSV output inside docker.
+    group: Utility tasks
+#    prerequisites: is a prereq, but I don't want to run the setup script always...
+#      - dep
+    run:
+      container: build-env
+      command: sh -c 'python -m pipenv run python examples/output_to_csv.py'

@@ -5,5 +5,5 @@
 *egg*
 *reqlib*
 .env
-Pipefile.lock
+Pipfile.lock
 output.csv

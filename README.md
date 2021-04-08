@@ -4,6 +4,35 @@ Makes working with [Redash](https://redash.io/) lots of fun! Generate
 docs in CSV/Markdown with a few commands, a list of the dashboards,
 queries, rename thing in bulk...
 
+### Setup whatever
+This project is a ./go project; To run anything in this project,
+you only need the batect requisites, Docker & a JVM. Then: 
+
+```shell
+
+$ ./batect --list-tasks
+Utility tasks:
+- dep: Installs dependencies via pipenv
+- run_csv_output: Auto sources your .env file, then runs the CSV output inside docker.
+- shell: Start a shell in the development environment.
+- test: Runs the tests inside docker.
+
+...
+
+$ ./batect run_csv_output
+
+
+...
+Loading .env environment variables...
+
+
+Loading .env environment variables...
+ Connecting to https://.../ using API key XXX...
+
+run_csv_output finished with exit code 0 in 11.5s.
+
+```
+
 ### Take Advantage of some documentation
 
 In addition to the metadata already in redash (creation date, name, tags,...)
